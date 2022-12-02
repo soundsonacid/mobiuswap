@@ -22,7 +22,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apollo/client@npm:3.7.1":
+"@apollo/client@npm:3.7.1, @apollo/client@npm:^3.7.1":
   version: 3.7.1
   resolution: "@apollo/client@npm:3.7.1"
   dependencies:
@@ -5971,6 +5971,15 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: 537cff67c75f25b86df8909131b4c2100028bb73368125cef1358b41ba016377d0fc86e9e6101c2d3860cb83aff1be27953616a918de5b318b5fb18c8f4de09d
+  languageName: node
+  linkType: hard
+
+"@types/graphql@npm:^14.5.0":
+  version: 14.5.0
+  resolution: "@types/graphql@npm:14.5.0"
+  dependencies:
+    graphql: "*"
+  checksum: b55a22e7654d161c6337e90c5ff04277977ef3acf78a8d14d26e4b039d1e8cc98ca108c8d93ea92576530222410b5d4bd47cb75293ef60505d454a9300d487ff
   languageName: node
   linkType: hard
 
@@ -13447,7 +13456,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql@npm:16.6.0, graphql@npm:^15.0.0 || ^16.0.0":
+"graphql@npm:*, graphql@npm:16.6.0, graphql@npm:^15.0.0 || ^16.0.0":
   version: 16.6.0
   resolution: "graphql@npm:16.6.0"
   checksum: 3a2c15ff58b69d017618d2b224fa6f3c4a7937e1f711c3a5e0948db536b4931e6e649560b53de7cc26735e027ceea6e2d0a6bb7c29fc4639b290313e3aa71618
@@ -19658,7 +19667,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hot-toast@npm:2.4.0":
+"react-hot-toast@npm:2.4.0, react-hot-toast@npm:^2.4.0":
   version: 2.4.0
   resolution: "react-hot-toast@npm:2.4.0"
   dependencies:
@@ -20417,7 +20426,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
+    "@apollo/client": ^3.7.1
     "@redwoodjs/core": 3.5.0
+    "@types/graphql": ^14.5.0
+    react-hot-toast: ^2.4.0
   languageName: unknown
   linkType: soft
 

@@ -1,54 +1,77 @@
-// import { Link, routes } from '@redwoodjs/router'
 import * as React from 'react'
 
-import { MetaTags } from '@redwoodjs/web'
+import toast, { Toaster } from 'react-hot-toast'
+import { CreateUserMutation, CreateUserMutationVariables } from 'types/graphql'
 
-// import * as Handler from './eventHandler'
+import { Form, Label, FieldError, TextField, Submit } from '@redwoodjs/forms'
+import { MetaTags, useMutation } from '@redwoodjs/web'
+
+// import { toast, Toaster } from '@redwoodjs/web/toast'
+
+const CREATE_USER = gql`
+  mutation CreateUserMutation($input: CreateUserInput!) {
+    createUser(input: $input) {
+      id
+    }
+  }
+`
 
 const LandingPage = () => {
+  const [create, { loading }] = useMutation<
+    CreateUserMutation,
+    CreateUserMutationVariables
+  >(CREATE_USER, {
+    onCompleted: () => {
+      toast.success('Alpha registration complete!')
+    },
+  })
+
+  const onSubmit = (data) => {
+    try {
+      create({ variables: { input: data } })
+    } catch (e) {
+      console.log('Something went wrong.')
+    }
+  }
+
   return (
     <>
-
       <MetaTags title="Landing" description="Landing page" />
-      <h1>MobiuSwap</h1>
-      <p>The next generation of exchange.</p>
-      <h2>Built by Orion Ventures.</h2>
-      <p>Sign up for alpha:</p>
-      <div className="row text-center">
-        <div className="col-md-4 align">
-          <span>
-            <input
-              id="email"
-              name="email"
-              type="text"
-              className="form-control"
-              placeholder="mobiuswap@gmail.com"
-              onChange={Handler.handleChange}
-            ></input>
-            <button style={{ marginTop: 15 }} className="btn btn-primary">
-              Submit
-            </button>
-          </span>
+      <Toaster />
+      <div className="container">
+        <div className="row text-center">
+          <div className="col-md-12">
+            <h2>MobiuSwap</h2>
+            <p>The next generation of exchange.</p>
+            <p>Sign up for alpha:</p>
+          </div>
+        </div>
+        <div className="row text-center">
+          <div className="col-md-12">
+            <Form onSubmit={onSubmit}>
+              <Label name="Email" errorClassName="error">
+                {' '}
+                Email:{' '}
+              </Label>
+              <TextField
+                name="email"
+                validation={{
+                  required: true,
+                  pattern: {
+                    value: /^[^@]+@[^.]+\..+$/,
+                    message: 'Please enter a valid email address',
+                  },
+                }}
+                errorClassName="error"
+              />
+              <FieldError name="Email" className="error" />
+
+              <Submit disabled={loading}>Submit</Submit>
+            </Form>
+            <h2>Built by Orion Ventures.</h2>
+          </div>
         </div>
       </div>
-
-      <script>
-        const Handler = () => {
-        return (
-          const [email, setEmail] = useState('')
-
-          const [updated, setUpdated] = useState(email)
-
-          const handleChange = (event) => {
-            setEmail((event.target as HTMLInputElement).value)
-          };
-
-          const handleClick = () => {
-            setUpdated(email)
-          };
-        )
-      }
-      </script>
     </>
   )
 }
