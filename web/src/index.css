@@ -86,6 +86,8 @@ button:active{
   transform: scale(.80);
 }
 
-container: {
-  textAlign: center
+.center {
+  border: 5px;
+  display: flex;
+  justify-content: center;
 }

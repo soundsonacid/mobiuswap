@@ -27,11 +27,7 @@ const LandingPage = () => {
   })
 
   const onSubmit = (data) => {
-    try {
-      create({ variables: { input: data } })
-    } catch (e) {
-      console.log('Something went wrong.')
-    }
+    create({ variables: { input: data } })
   }
 
   return (
@@ -41,33 +37,35 @@ const LandingPage = () => {
       <div className="container">
         <div className="row text-center">
           <div className="col-md-12">
-            <h2>MobiuSwap</h2>
-            <p>The next generation of exchange.</p>
-            <p>Sign up for alpha:</p>
+            <h1>Mobius.</h1>
+            <h2>The next generation of exchange.</h2>
+            <h2>Sign up for alpha:</h2>
           </div>
         </div>
         <div className="row text-center">
           <div className="col-md-12">
-            <Form onSubmit={onSubmit}>
-              <Label name="Email" errorClassName="error">
-                {' '}
-                Email:{' '}
-              </Label>
-              <TextField
-                name="email"
-                validation={{
-                  required: true,
-                  pattern: {
-                    value: /^[^@]+@[^.]+\..+$/,
-                    message: 'Please enter a valid email address',
-                  },
-                }}
-                errorClassName="error"
-              />
-              <FieldError name="Email" className="error" />
+            <h2>
+              <Form onSubmit={onSubmit}>
+                <Label name="Email" errorClassName="error">
+                  {' '}
+                  Email:{' '}
+                </Label>
+                <TextField
+                  name="email"
+                  validation={{
+                    required: true,
+                    pattern: {
+                      value: /^[^@]+@[^.]+\..+$/,
+                      message: 'Please enter a valid email address',
+                    },
+                  }}
+                  errorClassName="error"
+                />
+                <FieldError name="Email" className="error" />
 
-              <Submit disabled={loading}>Submit</Submit>
-            </Form>
+                <Submit disabled={loading}>Submit</Submit>
+              </Form>
+            </h2>
             <h2>Built by Orion Ventures.</h2>
           </div>
         </div>
