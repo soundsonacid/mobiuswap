@@ -10,6 +10,7 @@ import {
   FormError,
   TextField,
   Submit,
+  useForm,
 } from '@redwoodjs/forms'
 import { MetaTags, useMutation } from '@redwoodjs/web'
 
@@ -22,12 +23,14 @@ const CREATE_USER = gql`
 `
 
 const LandingPage = () => {
+  const formMethods = useForm()
   const [create, { loading, error }] = useMutation<
     CreateUserMutation,
     CreateUserMutationVariables
   >(CREATE_USER, {
     onCompleted: () => {
       toast.success('Alpha registration complete!')
+      formMethods.reset()
     },
   })
 
@@ -54,6 +57,7 @@ const LandingPage = () => {
                 onSubmit={onSubmit}
                 config={{ mode: 'onBlur' }}
                 error={error}
+                formMethods={formMethods}
               >
                 <FormError error={error} wrapperClassName="form-error" />
                 <Label name="Email" errorClassName="error">
