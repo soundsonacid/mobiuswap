@@ -51,19 +51,14 @@ input.error, textarea.error {
 
 body{
   margin: 0;
-  background: rgb(17, 17, 17);
-  color: white;
+  font-family: Verdana, sans-serif;
+  background: rgb(246, 247, 249);
+  color: black;
 }
 p{
   color: grey;
 }
-.meta-gray {
-  -webkit-filter: grayscale(1);
-}
 
-.meta-normal {
-  -webkit-filter: grayscale(0);
-}
 .align{
   margin: 0 auto;
 

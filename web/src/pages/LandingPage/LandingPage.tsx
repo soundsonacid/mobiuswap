@@ -3,10 +3,15 @@ import * as React from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 import { CreateUserMutation, CreateUserMutationVariables } from 'types/graphql'
 
-import { Form, Label, FieldError, TextField, Submit } from '@redwoodjs/forms'
+import {
+  Form,
+  Label,
+  FieldError,
+  FormError,
+  TextField,
+  Submit,
+} from '@redwoodjs/forms'
 import { MetaTags, useMutation } from '@redwoodjs/web'
-
-// import { toast, Toaster } from '@redwoodjs/web/toast'
 
 const CREATE_USER = gql`
   mutation CreateUserMutation($input: CreateUserInput!) {
@@ -17,7 +22,7 @@ const CREATE_USER = gql`
 `
 
 const LandingPage = () => {
-  const [create, { loading }] = useMutation<
+  const [create, { loading, error }] = useMutation<
     CreateUserMutation,
     CreateUserMutationVariables
   >(CREATE_USER, {
@@ -32,7 +37,7 @@ const LandingPage = () => {
 
   return (
     <>
-      <MetaTags title="Landing" description="Landing page" />
+      <MetaTags title="Mobius" description="Mobiuswap" />
       <Toaster />
       <div className="container">
         <div className="row text-center">
@@ -45,7 +50,12 @@ const LandingPage = () => {
         <div className="row text-center">
           <div className="col-md-12">
             <h2>
-              <Form onSubmit={onSubmit}>
+              <Form
+                onSubmit={onSubmit}
+                config={{ mode: 'onBlur' }}
+                error={error}
+              >
+                <FormError error={error} wrapperClassName="form-error" />
                 <Label name="Email" errorClassName="error">
                   {' '}
                   Email:{' '}
@@ -54,10 +64,6 @@ const LandingPage = () => {
                   name="email"
                   validation={{
                     required: true,
-                    pattern: {
-                      value: /^[^@]+@[^.]+\..+$/,
-                      message: 'Please enter a valid email address',
-                    },
                   }}
                   errorClassName="error"
                 />
