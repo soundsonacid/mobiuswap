@@ -7,7 +7,6 @@ import {
   Form,
   Label,
   FieldError,
-  FormError,
   TextField,
   Submit,
   useForm,
@@ -21,15 +20,18 @@ const CREATE_USER = gql`
     }
   }
 `
-
 const LandingPage = () => {
-  const formMethods = useForm()
+  const formMethods = useForm({ mode: 'onBlur' })
   const [create, { loading, error }] = useMutation<
     CreateUserMutation,
     CreateUserMutationVariables
   >(CREATE_USER, {
     onCompleted: () => {
       toast.success('Alpha registration complete!')
+      formMethods.reset()
+    },
+    onError: () => {
+      toast.error('Already registered!')
       formMethods.reset()
     },
   })
@@ -53,13 +55,7 @@ const LandingPage = () => {
         <div className="row text-center">
           <div className="col-md-12">
             <h2>
-              <Form
-                onSubmit={onSubmit}
-                config={{ mode: 'onBlur' }}
-                error={error}
-                formMethods={formMethods}
-              >
-                <FormError error={error} wrapperClassName="form-error" />
+              <Form onSubmit={onSubmit} error={error} formMethods={formMethods}>
                 <Label name="Email" errorClassName="error">
                   {' '}
                   Email:{' '}
