@@ -22,6 +22,7 @@ const CREATE_USER = gql`
 `
 const LandingPage = () => {
   const formMethods = useForm({ mode: 'onBlur' })
+
   const [create, { loading, error }] = useMutation<
     CreateUserMutation,
     CreateUserMutationVariables
@@ -31,7 +32,7 @@ const LandingPage = () => {
       formMethods.reset()
     },
     onError: () => {
-      toast.error('Already registered!')
+      toast.error('Email already registered!')
       formMethods.reset()
     },
   })
@@ -44,18 +45,16 @@ const LandingPage = () => {
     <>
       <MetaTags title="Mobius" description="Mobiuswap" />
       <Toaster />
-      <div className="container">
-        <div className="row text-center">
-          <div className="col-md-12">
-            <h1>Mobius.</h1>
-            <h2>The next generation of exchange.</h2>
-            <h2>Sign up for alpha:</h2>
-          </div>
-        </div>
+      <div className="container-center">
         <div className="row text-center">
           <div className="col-md-12">
             <h2>
-              <Form onSubmit={onSubmit} error={error} formMethods={formMethods}>
+              <Form
+                onSubmit={onSubmit}
+                config={{ mode: 'onBlur' }}
+                error={error}
+                formMethods={formMethods}
+              >
                 <Label name="Email" errorClassName="error">
                   {' '}
                   Email:{' '}
@@ -68,11 +67,11 @@ const LandingPage = () => {
                   errorClassName="error"
                 />
                 <FieldError name="Email" className="error" />
-
-                <Submit disabled={loading}>Submit</Submit>
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  <Submit disabled={loading}>Submit</Submit>
+                </div>
               </Form>
             </h2>
-            <h2>Built by Orion Ventures.</h2>
           </div>
         </div>
       </div>
