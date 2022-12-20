@@ -32,7 +32,7 @@ const LandingPage = () => {
       formMethods.reset()
     },
     onError: () => {
-      toast.error('Email already registered!')
+      toast.error('Registration error.')
       formMethods.reset()
     },
   })
@@ -44,6 +44,7 @@ const LandingPage = () => {
   return (
     <>
       <MetaTags title="Mobius" description="Mobiuswap" />
+
       <Toaster />
       <div className="container-center">
         <div className="row text-center">
@@ -54,6 +55,7 @@ const LandingPage = () => {
                 config={{ mode: 'onBlur' }}
                 error={error}
                 formMethods={formMethods}
+                style={{ justifyContent: 'center' }}
               >
                 <Label name="Email" errorClassName="error">
                   {' '}
@@ -75,6 +77,10 @@ const LandingPage = () => {
           </div>
         </div>
       </div>
+
+      <footer className="footer">
+        <p>© 2022 Orion Ventures</p>
+      </footer>
     </>
   )
 }
