@@ -49,13 +49,14 @@ const LandingPage = () => {
       <div className="container-center">
         <div className="row text-center">
           <div className="col-md-12">
+            <h2 className="sign-up-text">The next generation of exchange.</h2>
             <h2>
               <Form
                 onSubmit={onSubmit}
                 config={{ mode: 'onBlur' }}
                 error={error}
                 formMethods={formMethods}
-                style={{ justifyContent: 'center' }}
+                style={{ margin: '0 auto', width: '80%' }}
               >
                 <Label name="Email" errorClassName="error">
                   {' '}
@@ -77,7 +78,6 @@ const LandingPage = () => {
           </div>
         </div>
       </div>
-
       <footer className="footer">
         <p>© 2022 Orion Ventures</p>
       </footer>
