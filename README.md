@@ -1,1 +1,1 @@
-mobiuswap: the next generation of exchange.
+infinicoin: the next generation of exchange.
